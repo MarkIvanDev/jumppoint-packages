@@ -13,13 +13,13 @@
 
   <PropertyGroup>
     <PackageId>JumpPoint.Extensions</PackageId>
-    <PackageVersion>0.3.1-beta</PackageVersion>
+    <PackageVersion>0.4.0-beta</PackageVersion>
     <Title>JumpPoint.Extensions</Title>
     <Authors>markivan.basto</Authors>
     <Description>Helper classes for Jump Point Extensions</Description>
-    <Copyright>(c) 2021 Mark Ivan Basto</Copyright>
-    <PackageProjectUrl>https://github.com/MarkIvanDev/JumpPoint</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/MarkIvanDev/JumpPoint.git</RepositoryUrl>
+    <Copyright>(c) 2022 Mark Ivan Basto</Copyright>
+    <PackageProjectUrl>https://github.com/MarkIvanDev/jumppoint-packages</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MarkIvanDev/jumppoint-packages.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -29,22 +29,12 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)'=='Debug_BETA'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>$(DefineConstants);DEBUG;TRACE;BETA</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
+    <DefineConstants>$(DefineConstants);BETA</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release_BETA'">
-    <DefineConstants>$(DefineConstants);TRACE;BETA</DefineConstants>
+    <DefineConstants>$(DefineConstants);BETA</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
