@@ -66,6 +66,18 @@ namespace JumpPoint.Extensions
             }
         }
 
+        public static async Task<string> ReadText(this StorageFile file)
+        {
+            try
+            {
+                return await FileIO.ReadTextAsync(file);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public static async Task<byte[]> ReadBytes(this StorageFile file)
         {
             try
@@ -84,7 +96,7 @@ namespace JumpPoint.Extensions
             if (!string.IsNullOrEmpty(token))
             {
                 var file = await SharedStorageAccessManager.RedeemTokenForFileAsync(token);
-                var text = await FileIO.ReadTextAsync(file);
+                var text = await file.ReadText();
                 return JsonConvert.DeserializeObject<List<T>>(text);
             }
             else
@@ -93,11 +105,31 @@ namespace JumpPoint.Extensions
             }
         }
 
+        static async Task<byte[]> PlatformReadBytes(string token)
+        {
+            if (!string.IsNullOrEmpty(token))
+            {
+                var file = await SharedStorageAccessManager.RedeemTokenForFileAsync(token);
+                return await file.ReadBytes();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         static async Task<string> PlatformWriteItems<T>(IList<T> items)
         {
             var file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(Path.GetRandomFileName(), CreationCollisionOption.GenerateUniqueName);
             var json = JsonConvert.SerializeObject(items);
             await file.WriteText(json);
+            return SharedStorageAccessManager.AddFile(file);
+        }
+
+        static async Task<string> PlatformWriteBytes(byte[] bytes)
+        {
+            var file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(Path.GetRandomFileName(), CreationCollisionOption.GenerateUniqueName);
+            await file.WriteBytes(bytes);
             return SharedStorageAccessManager.AddFile(file);
         }
 

@@ -11,7 +11,13 @@ namespace JumpPoint.Extensions
         static Task<IList<T>> PlatformReadItems<T>(string token)
             => throw new NotImplementedException();
 
+        static Task<byte[]> PlatformReadBytes(string token)
+            => throw new NotImplementedException();
+
         static Task<string> PlatformWriteItems<T>(IList<T> items)
+            => throw new NotImplementedException();
+
+        static Task<string> PlatformWriteBytes(byte[] bytes)
             => throw new NotImplementedException();
 
         static Task<Stream> PlatformGetStream(Uri uri)
